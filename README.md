@@ -18,11 +18,43 @@ YouTube「皇帝ペンギンラボ」の動画補足です。コマンドはこ�
 完了後、タスクトレイ（画面右下）にラマのアイコンが出ればOK。
 
 <details>
-<summary>コマンドで入れたい人（winget）</summary>
+<summary>コマンドで入れたい人（winget）— 探す→確認→入れる の3ステップ</summary>
+
+winget は Windows 標準のアプリ管理コマンドです。名前しか知らないアプリを入れるときの実務手順はこの3段階:
+
+**① 検索 — カタログから探して「ID」を調べる**
+
+```powershell
+winget search ollama
+```
+
+似た名前のアプリも一緒に出てくるので、一覧の **Id 列** から本物（`Ollama.Ollama`）を見つけます。以後の指定はすべてこの ID で行います（名前より確実）。
+
+**② 確認 — 本物かどうか素性を見る**
+
+```powershell
+winget show Ollama.Ollama
+```
+
+`Publisher Url` / `Homepage` が公式サイト（https://ollama.com/）になっているかを確認。
+winget のカタログは誰でも登録申請できるので、初めて入れるアプリでは発行元チェックを癖にすると安全です。
+
+**③ インストール**
 
 ```powershell
 winget install Ollama.Ollama
 ```
+
+ダウンロード → 改ざんチェック（SHA256 照合）→ インストールまで自動で走ります。
+落ちてくるファイルは公式サイトの `OllamaSetup.exe` と同一なので、出来上がりは手動インストールと同じです。
+
+入ったかどうかの確認は:
+
+```powershell
+winget list ollama
+```
+
+（`search` = 入れられるものを探す / `list` = 入っているものを探す、と覚えると混乱しません）
 </details>
 
 ## 2. モデルをダウンロード
