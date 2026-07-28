@@ -62,22 +62,43 @@ winget list ollama
 PowerShell（またはターミナル）を開いて:
 
 ```powershell
-ollama pull qwen3:8b
+ollama pull phi4-mini
 ```
 
-5.2GB のダウンロードが走ります。回線次第で数分〜。
+2.5GB のダウンロードが走ります。回線次第で数分〜。
+（16GB RAM でも安心な一番軽いモデルから始めるのがおすすめ。物足りなくなったら `qwen3:8b` へ）
+
+※ `pull` を飛ばして `run` してもモデルがなければ自動でダウンロードされます。分けているのは「待ち時間があるのはここ」と分かるようにするためです。
 
 ## 3. 動かす
 
 ```powershell
-ollama run qwen3:8b --think=false
+ollama run phi4-mini --verbose
 ```
 
 プロンプトが出たら日本語で話しかけてください。終了は `/bye`。
 
-> **⚠️ `--think=false` を忘れずに。** qwen3 系は「考えるモード」が標準ONで、
+**オプションの意味:**
+
+| オプション | 何が起きるか |
+|---|---|
+| `--verbose` | **統計モード**。応答が終わるたびに処理の内訳が表示される（下記） |
+| `--think=false` | **思考モードOFF**。qwen3 など「考えるモード」搭載モデル専用（phi4-mini には不要） |
+
+`--verbose` を付けると応答のあとにこんな統計が出ます:
+
+```
+total duration:       12.4s      ← 全体の所要時間
+load duration:        3.1s       ← モデルをRAMに読み込んだ時間（2回目以降はほぼ0に）
+prompt eval rate:     45.2 tokens/s  ← あなたの入力を読んだ速度
+eval rate:            8.3 tokens/s   ← 返事を生成した速度 ★ここが「体感速度」
+```
+
+「自分のPCで何 tokens/s 出るか」が数字で分かるので、モデル選びの物差しになります。
+
+> **⚠️ qwen3 系を使う場合の注意:** qwen3 は「考えるモード」が標準ONで、
 > 最初の返事まで**2分近く無言**になります（故障ではありません）。
-> 対話中に切り替える場合は `/set nothink` と入力。
+> `ollama run qwen3:8b --think=false` と付けるか、対話中に `/set nothink` と入力してください。
 
 ## 4. 本当にCPUで動いてる？の確認
 
