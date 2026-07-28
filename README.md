@@ -2,23 +2,7 @@
 
 YouTube「皇帝ペンギンラボ」の動画補足です。コマンドはここからコピペしてください。
 
-## 0. 事前確認（自分のRAMを知る）
-
-`Ctrl + Shift + Esc` でタスクマネージャ → パフォーマンス → メモリ。
-
-| RAM | 使えるモデルの目安 |
-|---|---|
-| 16GB | phi4-mini / qwen3:8b まで |
-| 32GB | gemma4:12b、余裕があれば 27B クラスも |
-
-## 1. インストール
-
-[ollama.com](https://ollama.com/) → **Download for Windows** → `OllamaSetup.exe` を実行。
-
-完了後、タスクトレイ（画面右下）にラマのアイコンが出ればOK。
-
-<details>
-<summary>コマンドで入れたい人（winget）— 探す→確認→入れる の3ステップ</summary>
+## 1. インストール（winget — 探す→確認→入れる の3ステップ）
 
 winget は Windows 標準のアプリ管理コマンドです。名前しか知らないアプリを入れるときの実務手順はこの3段階:
 
@@ -46,15 +30,21 @@ winget install Ollama.Ollama
 ```
 
 ダウンロード → 改ざんチェック（SHA256 照合）→ インストールまで自動で走ります。
-落ちてくるファイルは公式サイトの `OllamaSetup.exe` と同一なので、出来上がりは手動インストールと同じです。
 
-入ったかどうかの確認は:
+完了後、タスクトレイ（画面右下）にラマのアイコンが出ればOK。入ったかどうかはコマンドでも確認できます:
 
 ```powershell
 winget list ollama
 ```
 
 （`search` = 入れられるものを探す / `list` = 入っているものを探す、と覚えると混乱しません）
+
+<details>
+<summary>ブラウザから入れたい人（こっちでもOK）</summary>
+
+https://ollama.com/ を開く → **Download for Windows** → `OllamaSetup.exe` を実行。
+
+winget が落とすファイルと同一物なので、出来上がりは同じです。完了確認は同じくタスクトレイのラマのアイコン。
 </details>
 
 ## 2. モデルをダウンロード
@@ -139,5 +129,5 @@ ollama ps
 
 ---
 
-📺 YouTube: [皇帝ペンギンラボ](https://www.youtube.com/channel/UCw-ytk4y6y4MntCyeiSa_-w)
+📺 YouTube: 皇帝ペンギンラボ https://www.youtube.com/channel/UCw-ytk4y6y4MntCyeiSa_-w
 📝 ブログ: https://chibasyuta.org/
